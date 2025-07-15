@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input type="text" class="form-control" [ngClass]="{'error': hasError}" id="usernameInput"
+            placeholder="Username" [(ngModel)]="username" (input)="onInputChange()" name="username" required>
+    </div>
+
+    <div class="mb-3">
+        <input type="password" class="form-control" [ngClass]="{'error': hasError}" id="passwordInput"
+            placeholder="Password" [(ngModel)]="password" (input)="onInputChange()" name="password" required>
+    </div>
+
+    <!-- Optional: Error message -->
+    <div *ngIf="hasError" class="error-message mb-3">
+        Invalid username or password. Please try again.
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
