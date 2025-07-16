@@ -29,6 +29,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
   }
 
+  collapseMenu() {
+    this.isMenuCollapsed = true;
+  }
+
   ngOnDestroy() {
     this.loginSubscription.unsubscribe();
   }

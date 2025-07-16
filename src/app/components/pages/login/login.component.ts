@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   password = '';
   hasError = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
   onSubmit(): void {
     this.authService.login(this.username, this.password).subscribe({
@@ -24,6 +25,7 @@ export class LoginComponent {
         if (isAuthenticated) {
           console.log('Login successful - login component.ts');
           this.hasError = false;
+          this.router.navigate(['/profile']);
 
         } else {
           this.showError();

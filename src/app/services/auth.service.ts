@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, throwError, map, of, BehaviorSubject } from 'rxjs';
+import { UserDTO } from '../models/userdata';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ export class AuthService {
   // Track login state across the app
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
+  private userData = new BehaviorSubject<UserDTO | null>(null);
+  public userData$ = this.userData.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +35,7 @@ export class AuthService {
     }).pipe(
       map((response: any) => {
         console.log('Registration successful:', response);
+        this.userData.next(response);
         return true;
       }),
       catchError((error) => {
@@ -48,11 +53,13 @@ export class AuthService {
       map((response: any) => {
         console.log('Login successful:', response);
         this.isLoggedInSubject.next(true); // Update login state
+        this.userData.next(response); // Save user data
         return true;
       }),
       catchError((error) => {
         console.error('Login error:', error);
         this.isLoggedInSubject.next(false); // Update login state
+        this.userData.next(null); // Clear user data on error
         return of(false);
       })
     );
@@ -60,6 +67,7 @@ export class AuthService {
 
   logout() {
     this.isLoggedInSubject.next(false);
+    this.userData.next(null); // Clear user data on logout
   }
 
   getCurrentLoginState(): boolean {
