@@ -17,7 +17,39 @@ export class AuthService {
   private userData = new BehaviorSubject<UserDTO | null>(null);
   public userData$ = this.userData.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const token = this.getToken();
+    if (token && this.checkTokenExpiry(token) === false) {
+      this.isLoggedInSubject.next(true);
+      this.userData.next(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')!) : null);
+
+    }
+    else {
+      this.isLoggedInSubject.next(false);
+      this.userData.next(null);
+    }
+  }
+
+  // JWT
+  private getToken() {
+    const token = localStorage.getItem('authToken');
+    return token ? token : null;
+  }
+
+  private checkTokenExpiry(token: string): boolean {
+    const parsedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // split() splits the string at the '.' and returns an array. we get the payload which is at index 1
+    console.log('Parsed token expiry time:' + parsedToken?.exp + ' Current time: ' + Math.floor(Date.now() / 1000));
+
+    if (parsedToken && parsedToken.exp > Math.floor(Date.now() / 1000)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
+  // Login/ Registration methods
+
 
   register(
     firstname: string,
@@ -54,6 +86,8 @@ export class AuthService {
         console.log('Login successful:', response);
         this.isLoggedInSubject.next(true); // Update login state
         this.userData.next(response); // Save user data
+        localStorage.setItem('authToken', response.accessToken);
+        localStorage.setItem('userData', JSON.stringify(response));
         return true;
       }),
       catchError((error) => {
@@ -68,10 +102,13 @@ export class AuthService {
   logout() {
     this.isLoggedInSubject.next(false);
     this.userData.next(null); // Clear user data on logout
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userData');
   }
 
   getCurrentLoginState(): boolean {
     return this.isLoggedInSubject.value;
   }
+
 
 }

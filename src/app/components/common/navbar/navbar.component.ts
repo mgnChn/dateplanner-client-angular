@@ -15,18 +15,34 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
   isMenuCollapsed = true;
   isLoggedIn = false;
+  isAdmin = false;
 
-  private loginSubscription: Subscription = new Subscription();
+  private loginSubscriptions: Subscription = new Subscription();
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     // Subscribe to login state changes
-    this.loginSubscription = this.authService.isLoggedIn$.subscribe(
-      (loggedIn) => {
-        this.isLoggedIn = loggedIn;
-      }
+    this.loginSubscriptions.add(
+      this.authService.isLoggedIn$.subscribe(
+        (loggedIn) => {
+          this.isLoggedIn = loggedIn;
+        }
+      ));
+
+    this.loginSubscriptions.add(
+      this.authService.userData$.subscribe(
+        (userData) => {
+          if (userData?.roles.includes('ROLE_ADMIN')) {
+            this.isAdmin = true;
+          } else {
+            this.isAdmin = false;
+          }
+        }
+
+      )
     );
+
   }
 
   collapseMenu() {
@@ -34,7 +50,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loginSubscription.unsubscribe();
+    this.loginSubscriptions.unsubscribe();
   }
 
   logout() {
