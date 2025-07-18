@@ -47,10 +47,6 @@ export class AuthService {
     }
   }
 
-
-  // Login/ Registration methods
-
-
   register(
     firstname: string,
     lastname: string,
