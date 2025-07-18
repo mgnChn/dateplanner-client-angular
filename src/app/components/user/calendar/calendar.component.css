@@ -1,0 +1,67 @@
+.calendar-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.calendar-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.no-itineraries {
+    text-align: center;
+    color: #666;
+    padding: 40px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.itineraries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.itinerary-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.itinerary-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.itinerary-link {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    background-color: white;
+    transition: background-color 0.2s ease;
+}
+
+.itinerary-link:hover {
+    background-color: #f8f9fa;
+    text-decoration: none;
+    color: inherit;
+}
+
+.itinerary-link h3 {
+    margin: 0 0 10px 0;
+    color: #007bff;
+    font-size: 1.2em;
+}
+
+.itinerary-link p {
+    margin: 0 0 10px 0;
+    color: #666;
+}
+
+.itinerary-link small {
+    color: #888;
+    font-size: 0.9em;
+}

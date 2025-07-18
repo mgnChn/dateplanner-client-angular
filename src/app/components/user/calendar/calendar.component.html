@@ -1,1 +1,17 @@
-<p>calendar works!</p>
+<div class="calendar-container">
+    <h2>My Itineraries</h2>
+
+    <div *ngIf="itineraries.length === 0" class="no-itineraries">
+        <p>No itineraries found. Create your first itinerary!</p>
+    </div>
+
+    <div *ngIf="itineraries.length > 0" class="itineraries-list">
+        <div *ngFor="let itinerary of itineraries" class="itinerary-item">
+            <a href="#" (click)="onItineraryClick(itinerary); $event.preventDefault()" class="itinerary-link">
+                <h3>{{ itinerary.title || 'Untitled Itinerary' }}</h3>
+                <p>{{ itinerary.description || 'No description available' }}</p>
+                <small>Created: {{ itinerary.createdDate | date:'short' }}</small>
+            </a>
+        </div>
+    </div>
+</div>
