@@ -1,0 +1,51 @@
+.itinerary-container {
+    padding: 20px;
+    max-width: 0 auto;
+    margin: 0 auto;
+
+}
+
+.itin-content-wrapper {
+    min-width: 80%;
+    z-index: 1;
+}
+
+.calendar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 1440px;
+    /* 288 slots * 5px or any height scale */
+    width: 100%;
+    padding-left: 60px;
+    /* leave space for time labels */
+    box-sizing: border-box;
+}
+
+.timeslot {
+    height: calc(100% / 288);
+    /* one 5-minute slot */
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    color: #888;
+    position: relative;
+    padding-left: 4px;
+    box-sizing: border-box;
+    margin-left: -60px;
+    width: 60px;
+    text-align: right;
+}
+
+.event-block {
+    position: absolute;
+    left: 60px;
+    right: 10px;
+    background-color: #4285f4;
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    cursor: move;
+    z-index: 10;
+}

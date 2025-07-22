@@ -1,0 +1,15 @@
+:host {
+    position: fixed;
+    min-height: 70%;
+    min-width: 50%;
+    max-width: 90%;
+    z-index: 2;
+    top: 20%;
+    padding: 20px;
+    background-color: white;
+}
+
+
+.event {
+    max-width: 70%;
+}

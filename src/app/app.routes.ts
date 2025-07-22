@@ -9,6 +9,7 @@ import { ProfileComponent } from './components/user/profile/profile.component';
 import { PlanComponent } from './components/user/plan/plan.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { adminAuthGuard } from './routeguards/admin-auth.guard';
+import { ItineraryComponent } from './components/itinerary/itinerary.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
     { path: 'calendar', component: CalendarComponent },
     { path: 'plan', component: PlanComponent },
     { path: 'dashboard', component: AdminDashboardComponent, canActivate: [adminAuthGuard] },
+    { path: 'itinerary/:id/:title', component: ItineraryComponent },
     { path: '**', component: NotFoundComponent },
 ];
 

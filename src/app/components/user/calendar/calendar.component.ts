@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, of } from 'rxjs';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -15,7 +16,7 @@ import { NgFor, NgIf, DatePipe } from '@angular/common';
 })
 export class CalendarComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: AuthService, private http: HttpClient) { };
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router) { };
 
   private userDataSubscription: Subscription = new Subscription();
   private userData: UserDTO | null = null;
@@ -57,8 +58,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   onItineraryClick(itinerary: any) {
-    console.log('Clicked itinerary:', itinerary);
-    // Handle the click - you can navigate to detail page or show more info
+    this.router.navigate(['/itinerary', itinerary.id, itinerary.title]);
   }
 
   ngOnDestroy() {
