@@ -4,9 +4,11 @@
     min-width: 50%;
     max-width: 90%;
     z-index: 2;
-    top: 20%;
+    top: 15%;
+    bottom: 5%;
     padding: 20px;
     background-color: white;
+    overflow-y: auto;
 }
 
 
