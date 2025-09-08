@@ -15,3 +15,13 @@
 .event {
     max-width: 70%;
 }
+
+.event-card {
+    position: relative;
+}
+
+.event-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
