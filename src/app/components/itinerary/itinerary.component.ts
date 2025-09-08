@@ -108,6 +108,11 @@ export class ItineraryComponent {
     this.showEvent = true;
   }
 
+  closeEvent() {
+    this.showEvent = false;
+    this.selectedEvent = null;
+  }
+
 
 }
 
