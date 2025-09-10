@@ -5,29 +5,31 @@
     <form class="row g-3">
         <div class="col-12">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" [(ngModel)]="event.title" name="title">
+            <input type="text" class="form-control" id="title" [(ngModel)]="localTitle" name="title">
         </div>
         <div class="col-12">
             <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" [(ngModel)]="event.description" name="description">
+            <input type="text" class="form-control" id="description" [(ngModel)]="localDescription" name="description">
         </div>
 
         <div class="col-md-6">
-            <label for="startTime" class="form-label">Start Time</label>
-            <input type="text" class="form-control" id="startTime" [(ngModel)]="event.startTime" name="startTime">
+            <label for="startTime" class="form-label">Start Date & Time</label>
+            <input type="datetime-local" class="form-control" id="startTime" [(ngModel)]="localStartTime"
+                name="startTime" onkeydown="return false">
         </div>
         <div class="col-md-6">
-            <label for="endTime" class="form-label">End Time</label>
-            <input type="text" class="form-control" id="endTime" [(ngModel)]="event.endTime" name="endTime">
+            <label for="endTime" class="form-label">End Date & Time</label>
+            <input type="datetime-local" class="form-control" id="endTime" [(ngModel)]="localEndTime" name="endTime"
+                onkeydown="return false">
         </div>
 
         <div class="col-md-6">
             <label for="latitude" class="form-label">Latitude</label>
-            <input type="text" class="form-control" id="latitude" [(ngModel)]="event.latitude" name="latitude">
+            <input type="text" class="form-control" id="latitude" [(ngModel)]="localLatitude" name="latitude">
         </div>
         <div class="col-md-6">
             <label for="longitude" class="form-label">Longitude</label>
-            <input type="text" class="form-control" id="longitude" [(ngModel)]="event.longitude" name="longitude">
+            <input type="text" class="form-control" id="longitude" [(ngModel)]="localLongitude" name="longitude">
         </div>
 
 

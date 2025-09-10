@@ -18,12 +18,29 @@ export class EventComponent implements OnInit {
   @Input() event: any;
   @Output() close = new EventEmitter<void>(); // for child-to-parent communication
 
+  localId: string = '';
+  localTitle: string = '';
+  localStartTime: string = '';
+  localEndTime: string = '';
+  localDescription: string = '';
+  localLatitude: string = '';
+  localLongitude: string = '';
+
   constructor(private http: HttpClient) {
   }
 
 
   ngOnInit() {
     console.log('event passed from Itinerary to Event component: ', this.event);
+    this.localId = this.event.id || '';
+    this.localTitle = this.event.title || '';
+    this.localStartTime = this.event.startTime || '';
+    this.localEndTime = this.event.endTime || '';
+    this.localDescription = this.event.description || '';
+    this.localLatitude = this.event.latitude || '';
+    this.localLongitude = this.event.longitude || '';
+
+
   }
 
   closeEvent() {
@@ -34,13 +51,13 @@ export class EventComponent implements OnInit {
   onSubmit() {
     // Create JSON request object
     const eventData = {
-      id: this.event.id,
-      title: this.event.title,
-      startTime: this.event.startTime,
-      endTime: this.event.endTime,
-      description: this.event.description,
-      latitude: this.event.latitude,
-      longitude: this.event.longitude
+      id: this.localId,
+      title: this.localTitle,
+      startTime: this.localStartTime,
+      endTime: this.localEndTime,
+      description: this.localDescription,
+      latitude: this.localLatitude,
+      longitude: this.localLongitude
     };
 
     console.log('JSON request:', JSON.stringify(eventData));
